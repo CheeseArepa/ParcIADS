@@ -126,3 +126,22 @@ def mostrar_ganancia_global():
 
     total_ganancia = sum(venta["ganancia"] for venta in ventas.values())
     print(f"La ganancia total hasta el momento es: ${total_ganancia}")
+
+def adicionar_unidades():
+    print("\n=== Añadir unidades a un producto ===")
+    if not productos:
+        print("No hay productos en el inventario.")
+        return
+
+    mostrar_inventario(solo_nombre=True)
+    
+    id_producto = leer_entero("Ingrese el ID del producto al que desea añadir unidades: ")
+    if id_producto not in productos:
+        print("ID no válido. No se encontró ningún producto con ese ID.")
+        return
+
+    unidades = leer_entero("¿Cuántas unidades desea añadir? ", minimo=1)
+
+    producto = productos[id_producto]
+    producto["cantidad"] += unidades
+    print(f"Se añadieron {unidades} unidades a '{producto['nombre']}'. Nueva cantidad: {producto['cantidad']}")
