@@ -77,4 +77,25 @@ def agregar_producto():
     productos[nuevo_id] = nuevo_producto
     print(f"\nProducto '{nombre}' agregado exitosamente con ID {nuevo_id}.")
     
+def retirar_producto():
+    print("\n=== Retirar producto del inventario ===")
+    if not productos:
+        print("No hay productos para eliminar.")
+        return
 
+    mostrar_inventario(solo_nombre=True)
+    id_a_eliminar = leer_entero("Ingrese el ID del producto que desea eliminar: ")
+
+    if id_a_eliminar in productos:
+        nombre = productos[id_a_eliminar]["nombre"]
+        while True:
+            confirmacion = input(f"¿Está seguro que desea eliminar '{nombre}' (ID: {id_a_eliminar})? (s/n): ").strip().lower()
+            if confirmacion == "s":
+                del productos[id_a_eliminar]
+                print(f"Producto '{nombre}' eliminado correctamente.")
+                break
+    else:
+        print("ID no válido. No se encontró ningún producto con ese ID.")
+
+retirar_producto()
+mostrar_inventario()
