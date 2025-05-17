@@ -120,5 +120,11 @@ def mostrar_ventas():
     for venta in ventas.values():
         print(f"ID: {venta['id']}, Producto: {venta['nombre']}, Cantidad vendida: {venta['cantidad_vendida']}, Ganancia: ${venta['ganancia']}")
 
-retirar_producto()
-mostrar_ventas()
+def mostrar_ganancia_global():
+    print("\n=== GANANCIA GLOBAL ===")
+    if not ventas:
+        print("No hay ventas registradas todavía.")
+        return
+
+    total_ganancia = sum(venta["ganancia"] for venta in ventas.values())
+    print(f"La ganancia total hasta el momento es: ${total_ganancia}")
