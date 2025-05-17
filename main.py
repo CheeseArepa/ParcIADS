@@ -4,6 +4,7 @@ plantilla_producto = {
     "precio": 0,
     "cantidad": 0
 }
+ventas: dict[int, dict] = {}
 
 productos_base: dict[int, dict] = {
     1: {**plantilla_producto, "id": 1, "nombre": "Lay's", "precio": 1000, "cantidad": 5},
@@ -89,14 +90,35 @@ def retirar_producto():
     if id_producto in productos:
         producto = productos[id_producto]
         nombre = producto["nombre"]
+        precio = producto["precio"]
+
         if producto["cantidad"] > 0:
             producto["cantidad"] -= 1
             print(f"Se retiró una unidad de '{nombre}'. Cantidad restante: {producto['cantidad']}")
+
+            # Crear un nuevo registro de venta con ID único
+            id_venta = max(ventas.keys(), default=0) + 1
+            ventas[id_venta] = {
+                "id": id_venta,
+                "nombre": nombre,
+                "cantidad_vendida": 1,
+                "ganancia": precio
+            }
+
             if producto["cantidad"] == 0:
                 print(f"Advertencia: No quedan unidades de '{nombre}' en el inventario.")
         else:
             print(f"No se puede retirar '{nombre}': no hay unidades disponibles.")
     else:
         print("ID no válido. No se encontró ningún producto con ese ID.")
+def mostrar_ventas():
+    print("\n=== REGISTRO DE VENTAS ===")
+    if not ventas:
+        print("No se han registrado ventas todavía.")
+        return
+
+    for venta in ventas.values():
+        print(f"ID: {venta['id']}, Producto: {venta['nombre']}, Cantidad vendida: {venta['cantidad_vendida']}, Ganancia: ${venta['ganancia']}")
+
 retirar_producto()
-mostrar_inventario()
+mostrar_ventas()
