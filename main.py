@@ -1,3 +1,10 @@
+plantilla_producto = {
+    "id": None,
+    "nombre": "",
+    "precio": 0,
+    "cantidad": 0
+}
+
 def leer_entero(prompt: str, minimo: int = None, maximo: int = None) -> int:
     while True:
         try:
