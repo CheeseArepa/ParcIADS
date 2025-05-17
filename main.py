@@ -1,3 +1,5 @@
+import copy
+
 plantilla_producto = {
     "id": None,
     "nombre": "",
@@ -145,3 +147,14 @@ def adicionar_unidades():
     producto = productos[id_producto]
     producto["cantidad"] += unidades
     print(f"Se añadieron {unidades} unidades a '{producto['nombre']}'. Nueva cantidad: {producto['cantidad']}")
+
+def reiniciar_datos():
+    global productos, ventas
+    print("\n=== Reiniciando datos a valores de fábrica ===")
+    
+    productos.clear()
+    productos.update(copy.deepcopy(productos_base))
+    
+    ventas.clear()
+    
+    print("Inventario y ventas reiniciados correctamente.")
