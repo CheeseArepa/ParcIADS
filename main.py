@@ -27,7 +27,7 @@ productos_base: dict[int, dict] = {
     16: {**plantilla_producto, "id": 16, "nombre": "Uva", "precio": 1500, "cantidad": 5},
 
 }
-productos = productos_base.copy()
+productos = copy.deepcopy(productos_base)
 
 
 def leer_entero(prompt: str, minimo: int = None, maximo: int = None) -> int:
