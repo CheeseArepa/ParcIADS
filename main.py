@@ -47,4 +47,13 @@ def mostrar_menu() -> int:
     print("5. Salir")
     print("============================\n")
     return leer_entero("Seleccione una opción (1-5): ", minimo=1, maximo=5)
-    
+
+def mostrar_inventario(solo_nombre: bool = False):
+    print("\n===== INVENTARIO =====")
+    for producto in productos.values():  
+        if solo_nombre:
+            print(f"ID: {producto['id']}, Nombre: {producto['nombre']}")
+        else:
+            print(f"ID: {producto['id']}, Nombre: {producto['nombre']}, Precio: {producto['precio']}, Cantidad: {producto['cantidad']}")
+
+mostrar_inventario(True)
