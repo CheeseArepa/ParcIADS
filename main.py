@@ -77,4 +77,26 @@ def agregar_producto():
     productos[nuevo_id] = nuevo_producto
     print(f"\nProducto '{nombre}' agregado exitosamente con ID {nuevo_id}.")
     
+def retirar_producto():
+    print("\n=== Retirar una unidad de un producto ===")
+    if not productos:
+        print("No hay productos en el inventario.")
+        return
 
+    mostrar_inventario()
+    id_producto = leer_entero("Ingrese el ID del producto del cual desea retirar una unidad: ")
+
+    if id_producto in productos:
+        producto = productos[id_producto]
+        nombre = producto["nombre"]
+        if producto["cantidad"] > 0:
+            producto["cantidad"] -= 1
+            print(f"Se retiró una unidad de '{nombre}'. Cantidad restante: {producto['cantidad']}")
+            if producto["cantidad"] == 0:
+                print(f"Advertencia: No quedan unidades de '{nombre}' en el inventario.")
+        else:
+            print(f"No se puede retirar '{nombre}': no hay unidades disponibles.")
+    else:
+        print("ID no válido. No se encontró ningún producto con ese ID.")
+retirar_producto()
+mostrar_inventario()
