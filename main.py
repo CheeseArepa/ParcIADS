@@ -63,10 +63,9 @@ def agregar_producto():
     precio = leer_entero("Ingrese el precio del producto: ", minimo=1)
     cantidad = leer_entero("Ingrese la cantidad del producto: ", minimo=1)
 
-    # Obtener el próximo ID disponible
+
     nuevo_id = max(productos.keys(), default=0) + 1
 
-    # Crear el nuevo producto basado en la plantilla
     nuevo_producto = {
         **plantilla_producto,
         "id": nuevo_id,
@@ -96,7 +95,6 @@ def retirar_producto():
             producto["cantidad"] -= 1
             print(f"Se retiró una unidad de '{nombre}'. Cantidad restante: {producto['cantidad']}")
 
-            # Crear un nuevo registro de venta con ID único
             id_venta = max(ventas.keys(), default=0) + 1
             ventas[id_venta] = {
                 "id": id_venta,
