@@ -56,4 +56,25 @@ def mostrar_inventario(solo_nombre: bool = False):
         else:
             print(f"ID: {producto['id']}, Nombre: {producto['nombre']}, Precio: {producto['precio']}, Cantidad: {producto['cantidad']}")
 
-mostrar_inventario(True)
+def agregar_producto():
+    print("\n=== Agregar nuevo producto ===")
+    nombre = input("Ingrese el nombre del producto: ").strip()
+    precio = leer_entero("Ingrese el precio del producto: ", minimo=1)
+    cantidad = leer_entero("Ingrese la cantidad del producto: ", minimo=1)
+
+    # Obtener el próximo ID disponible
+    nuevo_id = max(productos.keys(), default=0) + 1
+
+    # Crear el nuevo producto basado en la plantilla
+    nuevo_producto = {
+        **plantilla_producto,
+        "id": nuevo_id,
+        "nombre": nombre,
+        "precio": precio,
+        "cantidad": cantidad
+    }
+
+    productos[nuevo_id] = nuevo_producto
+    print(f"\nProducto '{nombre}' agregado exitosamente con ID {nuevo_id}.")
+    
+
