@@ -41,15 +41,7 @@ def leer_entero(prompt: str, minimo: int = None, maximo: int = None) -> int:
         except ValueError:
             print("Entrada no válida. Debes ingresar un número entero.")
 
-def mostrar_menu() -> int:
-    print("\n===== MENÚ DE OPCIONES =====")
-    print("1. Registrar orden")
-    print("2. Ver fila")
-    print("3. Ver estadísticas")
-    print("4. Reiniciar datos")
-    print("5. Salir")
-    print("============================\n")
-    return leer_entero("Seleccione una opción (1-5): ", minimo=1, maximo=5)
+
 
 def mostrar_inventario(solo_nombre: bool = False):
     print("\n===== INVENTARIO =====")
@@ -158,3 +150,76 @@ def reiniciar_datos():
     ventas.clear()
     
     print("Inventario y ventas reiniciados correctamente.")
+def menu_principal():
+    while True:
+        print("\n===== MENÚ PRINCIPAL =====")
+        print("1. Retirar productos")
+        print("2. Inventario")
+        print("3. Informes")
+        print("4. Configuración")
+        print("5. Finalizar")
+        print("==========================")
+        opcion = leer_entero("Seleccione una opción (1-5): ", minimo=1, maximo=5)
+
+        if opcion == 1:
+            retirar_producto()
+            if not continuar_o_salir(): break
+        elif opcion == 2:
+            if not menu_inventario(): break
+        elif opcion == 3:
+            if not menu_informes(): break
+        elif opcion == 4:
+            if not menu_configuracion(): break
+        elif opcion == 5:
+            print("Programa finalizado.")
+            break
+
+def continuar_o_salir() -> bool:
+    print("\n¿Desea volver al menú principal o finalizar?")
+    print("1. Volver al menú principal")
+    print("2. Finalizar programa")
+    opcion = leer_entero("Seleccione una opción (1-2): ", minimo=1, maximo=2)
+    return opcion == 1  # True para continuar, False para salir
+
+def menu_inventario():
+    print("\n--- Submenú de Inventario ---")
+    print("1. Añadir unidad de producto")
+    print("2. Añadir un producto nuevo")
+    print("3. Mostrar inventario actual")
+    print("------------------------------")
+    opcion = leer_entero("Seleccione una opción (1-3): ", minimo=1, maximo=3)
+
+    if opcion == 1:
+        adicionar_unidades()
+    elif opcion == 2:
+        agregar_producto()
+    elif opcion == 3:
+        mostrar_inventario()
+
+    return continuar_o_salir()
+
+def menu_informes():
+    print("\n--- Submenú de Informes ---")
+    print("1. Informe de ganancia")
+    print("2. Informe de ventas")
+    print("----------------------------")
+    opcion = leer_entero("Seleccione una opción (1-2): ", minimo=1, maximo=2)
+
+    if opcion == 1:
+        mostrar_ganancia_global()
+    elif opcion == 2:
+        mostrar_ventas()
+
+    return continuar_o_salir()
+
+def menu_configuracion():
+    print("\n--- Submenú de Configuración ---")
+    print("1. Restaurar valores de fábrica")
+    print("--------------------------------")
+    opcion = leer_entero("Seleccione una opción (1): ", minimo=1, maximo=1)
+
+    if opcion == 1:
+        reiniciar_datos()
+
+    return continuar_o_salir()
+menu_principal()
